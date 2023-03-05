@@ -1,0 +1,33 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# generated files
+.tsbuildinfo
+**/.eslintcache
+
+# testing
+coverage
+
+# misc
+.DS_Store
+*.pem
+
+# Ignore files for PNPM
+pnpm-lock.yaml
+pnpm-workspace.yaml
+
+# local env files
+.env
+.env.*
+!.env.example
+
+# turbo
+.turbo
+
+# apps
+## web
+**/build
+**/.svelte-kit
+**/package

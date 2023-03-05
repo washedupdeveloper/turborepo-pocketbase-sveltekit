@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "packageManager": "pnpm@7.27.0",
+  "engines": {
+    "node": ">=17.0.0"
+  },
+  "volta": {
+    "node": "18.14.2"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --cache --write .",
+    "test:e2e": "turbo run test:e2e",
+    "test:unit": "turbo run test:unit"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.8.4",
+    "prettier-plugin-svelte": "^2.9.0",
+    "prettier-plugin-tailwindcss": "^0.2.3",
+    "turbo": "latest"
+  }
+}
