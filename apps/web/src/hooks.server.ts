@@ -15,6 +15,6 @@ export const handle: Handle = async ({ event, resolve }) => {
   event.locals.user = structuredClone(pb.authStore.model);
 
   const response = await resolve(event);
-  response.headers.set('set-cookie', pb.authStore.exportToCookie({ httpOnly: false }));
+  response.headers.set('set-cookie', pb.authStore.exportToCookie({ httpOnly: false, secure: false }));
   return response;
 };
