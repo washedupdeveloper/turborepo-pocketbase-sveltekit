@@ -6,7 +6,7 @@
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 {#if $user}
-	<h2>Logged in as {$user.email}</h2>
+	<h2>{$user.email}</h2>
 {:else}
 	<h2>Not logged in</h2>
 {/if}
