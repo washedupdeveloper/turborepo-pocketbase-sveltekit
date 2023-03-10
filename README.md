@@ -12,6 +12,7 @@ This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes th
 - `web`: a [Sveltekit](https://kit.svelte.dev/) fullstack app
 <!-- TODO Eventually add this, is avoided for now for simplicity sake - `ui`: a [Sveltekit](https://kit.svelte.dev/) library app, intended to be used as a UI library  -->
 - `eslint-config`:
+
 ### Utilities
 
 This turborepo has some additional tools already setup for you:

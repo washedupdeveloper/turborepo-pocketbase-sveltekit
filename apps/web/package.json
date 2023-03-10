@@ -11,8 +11,7 @@
     "test:unit": "vitest",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "lint": "prettier --cache --check --ignore-path=../../.prettierignore . && eslint --cache --fix --ignore-path=../../.eslintignore .",
-    "format": "prettier --cache --write --ignore-path=../../.prettierignore ."
+    "lint": "prettier --cache --write --ignore-path=../../.prettierignore . && eslint --cache --fix --ignore-path=../../.eslintignore ."
   },
   "dependencies": {
     "http-status": "^1.6.2",
