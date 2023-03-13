@@ -17,6 +17,7 @@
     "http-status": "^1.6.2",
     "nanoid": "^4.0.1",
     "pocketbase": "^0.12.1",
+    "svelte-french-toast": "^1.0.3",
     "theme-change": "^2.5.0",
     "zod": "^3.21.4",
     "zod-form-data": "^2.0.0"
