@@ -1,20 +1,32 @@
-import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import { loginFormSchema, type LoginForm } from '$lib/models';
+import { error, fail, redirect } from '@sveltejs/kit';
+import http from 'http-status';
+import { formData } from 'zod-form-data';
+import type { Actions, PageServerLoad } from './$types';
 
+// If there is a current auth session, redirect away from login page
+export const load: PageServerLoad = ({ locals }) => {
+  if (locals.pb.authStore.isValid) {
+    throw redirect(http.SEE_OTHER, '/');
+  }
+};
 export const actions: Actions = {
   default: async ({ locals, request }) => {
-    const data = Object.fromEntries(await request.formData()) as {
-      email: string;
-      password: string;
-    };
+    const form = formData(loginFormSchema).safeParse(await request.formData());
 
-    try {
-      await locals.pb.collection('users').authWithPassword(data.email, data.password);
-    } catch (err) {
-      console.error(err);
-      throw err;
+    if (!form.success) {
+      return fail(http.BAD_REQUEST, {
+        errors: form.error.flatten().fieldErrors as Record<keyof LoginForm, string[]>
+      });
     }
 
-    throw redirect(303, '/');
+    try {
+      await locals.pb.collection('users').authWithPassword(form.data.email, form.data.password);
+    } catch (err) {
+      console.error(err);
+      throw error(http.INTERNAL_SERVER_ERROR, { message: 'Unable to login user' });
+    }
+
+    throw redirect(http.SEE_OTHER, '/');
   }
 };

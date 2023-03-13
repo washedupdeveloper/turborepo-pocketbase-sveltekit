@@ -33,3 +33,15 @@ export const registerFormSchema = loginFormSchema
   });
 
 export type RegisterForm = z.infer<typeof registerFormSchema>;
+
+export const projectFormSchema = z.object({
+  companyName: z.string().nonempty(),
+  jobTitle: z.string().nonempty(),
+  description: z.string().nonempty(),
+  start: z.string().datetime().nonempty(),
+  end: z.string().datetime().optional(),
+  tools: z
+    .string()
+    .transform((csv) => csv.replace(/\[|\]/g, '').trim().split(','))
+    .pipe(z.string().array())
+});

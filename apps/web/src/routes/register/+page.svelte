@@ -1,57 +1,31 @@
 <script lang="ts">
-	import { applyAction, enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
+  import { enhance } from '$app/forms';
+  import InputField from '$lib/ui/InputField.svelte';
+  import type { ActionData } from './$types';
+  export let form: ActionData;
+  $: console.log(form);
 </script>
 
+<pre>{JSON.stringify(form, null, 2)}</pre>
 <div class="flex flex-col items-center h-full w-full pt-12">
-	<h2 class=" text-center text-3xl font-bold tracking-tight text-base-content">
-		Register for an account
-	</h2>
-	<p class="text-center mt-1">
-		Or <a href="/login" class="text-primary font-medium hover:cursor-pointer">sign in</a> if you already
-		have an account.
-	</p>
-	<form
-		method="POST"
-		class="flex flex-col items-center space-y-2 w-full mt-4"
-		use:enhance={() => {
-			return async ({ result, update }) => {
-				if (result.type === 'failure' || result.type === 'error') {
-					await applyAction(result);
-				} else {
-					update()
-						.then(async () => {
-							await goto('/login');
-						})
-						.catch(() => window.alert('Something went wrong while signing up, please try again'));
-				}
-			};
-		}}
-	>
-		<div class="form-control w-full max-w-md">
-			<label for="email" class="label font-medium pb-1">
-				<span class="label-text">Email</span>
-			</label>
-			<input type="email" name="email" class="input input-bordered w-full max-w-md mb-2" />
-		</div>
-		<div class="form-control w-full max-w-md">
-			<label for="password" class="label font-medium pb-1">
-				<span class="label-text">Password</span>
-			</label>
-			<input type="password" name="password" class="input input-bordered w-full max-w-md mb-2" />
-		</div>
-		<div class="form-control w-full max-w-md">
-			<label for="passwordConfirm" class="label font-medium pb-1">
-				<span class="label-text">Confirm Password</span>
-			</label>
-			<input
-				type="password"
-				name="passwordConfirm"
-				class="input input-bordered w-full max-w-md mb-2"
-			/>
-		</div>
-		<div class="w-full max-w-md pt-3">
-			<button type="submit" class="btn btn-primary w-full max-w-md">Register</button>
-		</div>
-	</form>
+  <h2 class="text-center text-3xl font-bold tracking-tight capitalize-first ">register for an account</h2>
+  <p class="text-center mt-1 capitalize-first">
+    or <a href="/login" class="text-primary font-medium hover:cursor-pointer">sign in</a>
+    if you already have an account.
+  </p>
+  <div class="card bg-base-100 shadow-lg w-96">
+    <div class="card-body">
+      <form method="POST" class="flex flex-col items-center space-y-2 w-full mt-4" use:enhance>
+        <InputField type="text" name="email" errors={form?.errors?.email} />
+
+        <InputField type="password" name="password" errors={form?.errors?.password} />
+
+        <InputField type="password" name="passwordConfirm" label="confirm password" errors={form?.errors?.passwordConfirm} />
+
+        <div class="w-full max-w-md pt-3">
+          <button type="submit" class="btn btn-primary w-full max-w-md capitalize">register</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
